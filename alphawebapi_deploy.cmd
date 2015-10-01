@@ -73,10 +73,6 @@ IF /I "AzureDeploymentSandbox.sln" NEQ "" (
   IF !ERRORLEVEL! NEQ 0 goto error
 )
 
-:: Custom - JavaScript minification with jsmin.exe to replicate SAS
-echo Calling jsmin.exe from %DEPLOYMENT_SOURCE% temp is %DEPLOYMENT_TEMP%
-"%DEPLOYMENT_SOURCE%\jsmin.exe" < "%DEPLOYMENT_SOURCE%\AlphaWebApi\Scripts\app.js" > "%DEPLOYMENT_TEMP%\Scripts\app.min.js"
-
 :: 2. Build to the temporary path
 IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
   call :ExecuteCmd "%MSBUILD_PATH%" "%DEPLOYMENT_SOURCE%\AlphaWebApi\AlphaWebApi.csproj" /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:_PackageTempDir="%DEPLOYMENT_TEMP%";AutoParameterizationWebConfigConnectionStrings=false;Configuration=Release;UseSharedCompilation=false /p:SolutionDir="%DEPLOYMENT_SOURCE%\.\\" %SCM_BUILD_ARGS%
@@ -85,6 +81,10 @@ IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
 )
 
 IF !ERRORLEVEL! NEQ 0 goto error
+
+:: Custom - JavaScript minification with jsmin.exe to replicate SAS
+echo Calling jsmin.exe from %DEPLOYMENT_SOURCE% temp is %DEPLOYMENT_TEMP%
+"%DEPLOYMENT_SOURCE%\jsmin.exe" < "%DEPLOYMENT_SOURCE%\AlphaWebApi\Scripts\app.js" > "%DEPLOYMENT_TEMP%\Scripts\app.min.js"
 
 :: 3. KuduSync
 IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
