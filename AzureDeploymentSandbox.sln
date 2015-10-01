@@ -7,6 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlphaWebApi", "AlphaWebApi\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BravoWebApi", "BravoWebApi\BravoWebApi.csproj", "{1B54CF94-2BC5-42D7-917A-CB9CA3DE845E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".tools", ".tools", "{2FBF8E2F-670A-407B-B4DD-D98FCA9B89F3}"
+	ProjectSection(SolutionItems) = preProject
+		jsmin.exe = jsmin.exe
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
