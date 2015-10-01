@@ -75,7 +75,7 @@ IF /I "AzureDeploymentSandbox.sln" NEQ "" (
 
 :: Custom - JavaScript minification with jsmin.exe to replicate SAS
 echo Calling jsmin.exe from %DEPLOYMENT_SOURCE% temp is %DEPLOYMENT_TEMP%
-"%DEPLOYMENT_SOURCE%\jsmin.exe" < "%DEPLOYMENT_SOURCE%\AlphaWebApi\Scripts\app.js" > "%DEPLOYMENT_SOURCE%\AlphaWebApi\Scripts\app.min.js"
+"%DEPLOYMENT_SOURCE%\jsmin.exe" < "%DEPLOYMENT_SOURCE%\AlphaWebApi\Scripts\app.js" > "%DEPLOYMENT_TEMP%\Scripts\app.min.js"
 
 :: 2. Build to the temporary path
 IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
