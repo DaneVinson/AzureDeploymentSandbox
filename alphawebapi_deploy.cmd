@@ -65,7 +65,7 @@ SET MSBUILD_PATH=%ProgramFiles(x86)%\MSBuild\14.0\Bin\MSBuild.exe
 :: Deployment
 :: ----------
 
-echo Handling .NET Web Application deployment.
+echo My customized .NET Web Application deployment.
 
 :: 1. Restore NuGet packages
 IF /I "AzureDeploymentSandbox.sln" NEQ "" (
