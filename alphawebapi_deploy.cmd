@@ -73,6 +73,9 @@ IF /I "AzureDeploymentSandbox.sln" NEQ "" (
   IF !ERRORLEVEL! NEQ 0 goto error
 )
 
+:: Custom - JavaScript minification with jsmin.exe to replicate SAS
+call :ExecuteCmd "%DEPLOYMENT_SOURCE%\jsmin.exe" < "%DEPLOYMENT_SOURCE%\AlphaWebApi\Scripts\app.js" > "%DEPLOYMENT_SOURCE%\AlphaWebApi\Scripts\app.min.js"
+
 :: 2. Build to the temporary path
 IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
   call :ExecuteCmd "%MSBUILD_PATH%" "%DEPLOYMENT_SOURCE%\AlphaWebApi\AlphaWebApi.csproj" /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:_PackageTempDir="%DEPLOYMENT_TEMP%";AutoParameterizationWebConfigConnectionStrings=false;Configuration=Release;UseSharedCompilation=false /p:SolutionDir="%DEPLOYMENT_SOURCE%\.\\" %SCM_BUILD_ARGS%
